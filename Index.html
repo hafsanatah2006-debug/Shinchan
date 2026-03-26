@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shinchan Funverse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fff5d6;
+      --paper:#fff9ea;
+      --ink:#121212;
+      --yellow:#ffd84c;
+      --red:#ff4b3a;
+      --blue:#3f6fff;
+      --mint:#1fbf90;
+      --line:#171717;
+      --shadow:0 18px 50px rgba(0,0,0,.14);
+      --header-h:78px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    button,input{font:inherit}
+    .wrap{max-width:1220px;margin:0 auto}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-weight:800;
+    }
+    .eyebrow::before{
+      content:"";
+      width:.8rem;height:.8rem;border-radius:999px;background:var(--red);
+      border:3px solid var(--line);
+      box-shadow:3px 3px 0 #fff;
+    }
+
+    .site-header{
+      position:fixed;
+      inset:0 0 auto 0;
+      z-index:50;
+      padding:18px 22px;
+      pointer-events:none;
+    }
+    .header-inner{
+      max-width:1220px;
+      margin:0 auto;
+      padding:14px 18px;
+      border:3px solid rgba(23,23,23,.1);
+      background:rgba(255,249,234,.72);
+      backdrop-filter:blur(10px);
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      pointer-events:auto;
+    }
+    .brand-mini{
+      display:flex;
+      align-items:center;
+      gap:.8rem;
+      min-width:0;
+    }
+    .brand-dot{
+      width:16px;height:16px;border-radius:50%;
+      background:var(--red);
+      border:3px solid var(--line);
+      box-shadow:3px 3px 0 var(--yellow);
+      flex:none;
+    }
+    .brand-mini strong{
+      font-family:Bangers, sans-serif;
+      letter-spacing:.08em;
+      font-size:1.45rem;
+      line-height:1;
+      white-space:nowrap;
+    }
+    .brand-mini span{
+      font-size:.74rem;
+      opacity:.7;
+      text-transform:uppercase;
+      letter-spacing:.15em;
+      font-weight:700;
+      white-space:nowrap;
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:1.1rem;
+      font-size:.92rem;
+      font-weight:700;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{opacity:.75;transition:.25s}
+    .nav a:hover{opacity:1;transform:translateY(-1px)}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.65rem;
+      padding:1rem 1.35rem;
+      border-radius:999px;
+      border:3px solid var(--line);
+      font-weight:800;
+      letter-spacing:.01em;
+      transition:transform .22s ease, box-shadow .22s ease, background .22s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-3px) rotate(-1deg)}
+    .btn-primary{
+      background:var(--line);
+      color:#fff;
+      box-shadow:0 10px 0 rgba(18,18,18,.18);
+    }
+    .btn-secondary{
+      background:#fff;
+      color:var(--line);
+      box-shadow:0 10px 0 rgba(255,255,255,.35);
+    }
+
+    .hero{
+      position:relative;
+      min-height:100svh;
+      background:
+        radial-gradient(circle at 14% 18%, rgba(255,255,255,.65) 0 8%, transparent 8.2%),
+        radial-gradient(circle at 82% 22%, rgba(255,255,255,.45) 0 6%, transparent 6.2%),
+        linear-gradient(180deg, #ffe87d 0%, #ffd84c 40%, #ffc95b 100%);
+      overflow:hidden;
+      padding:calc(var(--header-h) + 4.5rem) 5vw 2.5rem;
+    }
+    .hero::before{
+      content:"SHINCHAN";
+      position:absolute;
+      right:-1.2rem;
+      bottom:-1rem;
+      font-family:Bangers, sans-serif;
+      font-size:min(32vw,23rem);
+      line-height:.8;
+      color:rgba(255,255,255,.25);
+      letter-spacing:.04em;
+      pointer-events:none;
+    }
+    .hero-grid{
+      max-width:1220px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(280px, 470px) 1fr;
+      align-items:center;
+      gap:2rem;
+      min-height:calc(100svh - var(--header-h) - 5rem);
+      position:relative;
+      z-index:2;
+    }
+    .hero-copy{max-width:29rem}
+    .fan-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      background:#fff;
+      border:3px solid var(--line);
+      border-radius:999px;
+      padding:.65rem .9rem;
+      font-size:.8rem;
+      font-weight:800;
+      box-shadow:8px 8px 0 rgba(255,255,255,.35);
+    }
+    .fan-tag .spark{
+      width:.78rem;height:.78rem;border-radius:50%;
+      background:var(--yellow);
+      border:3px solid var(--line);
+    }
+    .hero-brand{
+      margin:.9rem 0 .35rem;
+      font-family:Bangers, sans-serif;
+      font-size:clamp(4.4rem, 11vw, 9rem);
+      line-height:.88;
+      letter-spacing:.06em;
+      text-shadow:4px 4px 0 rgba(255,255,255,.45);
+    }
+    .hero-title{
+      margin:0;
+      font-size:clamp(1.2rem, 2.5vw, 2rem);
+      line-height:1.08;
+      font-weight:900;
+      max-width:15ch;
+    }
+    .hero-copy p{
+      margin:1rem 0 0;
+      font-size:1rem;
+      line-height:1.65;
+      max-width:31ch;
+      opacity:.78;
+      font-weight:600;
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.9rem;
+      margin-top:1.5rem;
+    }
+    .hero-note{
+      margin-top:1rem;
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:800;
+      opacity:.7;
+    }
+
+    .hero-visual{
+      position:relative;
+      min-height:520px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      isolation:isolate;
+    }
+    .sunburst{
+      position:absolute;
+      width:min(62vw,540px);
+      aspect-ratio:1;
+      border-radius:50%;
+      background:
+        radial-gradient(circle, rgba(255,255,255,.88) 0 24%, rgba(255,255,255,.28) 24% 43%, transparent 43%),
+        radial-gradient(circle, #ff9f59 0, #ff8a45 55%, #ff7132 100%);
+      border:4px solid var(--line);
+      box-shadow:var(--shadow);
+      z-index:0;
+    }
+    .sunburst::before{
+      content:"";
+      position:absolute;
+      inset:-14px;
+      border-radius:50%;
+      border:4px dashed rgba(23,23,23,.35);
+      animation:spin 16s linear infinite;
+    }
+    .speech{
+      position:absolute;
+      right:4%;
+      top:8%;
+      background:#fff;
+      border:4px solid var(--line);
+      border-radius:1.4rem;
+      padding:.8rem 1rem;
+      font-weight:900;
+      font-size:1rem;
+      transform:rotate(5deg);
+      box-shadow:var(--shadow);
+      z-index:3;
+      animation:float 3.4s ease-in-out infinite;
+    }
+    .speech::after{
+      content:"";
+      position:absolute;
+      left:24px;
+      bottom:-14px;
+      width:20px;height:20px;
+      background:#fff;
+      border-right:4px solid var(--line);
+      border-bottom:4px solid var(--line);
+      transform:rotate(45deg);
+    }
+    .sticker{
+      position:absolute;
+      left:3%;
+      top:13%;
+      width:108px;height:108px;
+      border-radius:50%;
+      background:var(--red);
+      color:#fff;
+      border:4px solid var(--line);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      font-family:Bangers, sans-serif;
+      font-size:1.3rem;
+      line-height:.92;
+      letter-spacing:.07em;
+      transform:rotate(-12deg);
+      box-shadow:var(--shadow);
+      z-index:3;
+      animation:wiggle 3s ease-in-out infinite;
+    }
+    .cloud{
+      position:absolute;
+      background:#fff;
+      border:4px solid var(--line);
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      z-index:1;
+      will-change:transform;
+    }
+    .cloud::before,.cloud::after{
+      content:"";
+      position:absolute;
+      background:#fff;
+      border:4px solid var(--line);
+      border-radius:50%;
+    }
+    .cloud-1{width:120px;height:50px;left:4%;top:18%}
+    .cloud-1::before{width:50px;height:50px;left:14px;top:-26px}
+    .cloud-1::after{width:60px;height:60px;right:16px;top:-30px}
+    .cloud-2{width:150px;height:58px;right:2%;bottom:15%}
+    .cloud-2::before{width:55px;height:55px;left:18px;top:-24px}
+    .cloud-2::after{width:72px;height:72px;right:20px;top:-34px}
+    .cloud-3{width:95px;height:42px;left:28%;bottom:5%}
+    .cloud-3::before{width:38px;height:38px;left:12px;top:-18px}
+    .cloud-3::after{width:46px;height:46px;right:10px;top:-22px}
+
+    .hero-svg{
+      width:min(100%,580px);
+      position:relative;
+      z-index:2;
+      filter:drop-shadow(0 30px 35px rgba(0,0,0,.18));
+    }
+    .boy{animation:bob 3.8s ease-in-out infinite}
+    .wave-arm{transform-origin:72% 48%;animation:wave 1.9s ease-in-out infinite}
+    .blink{transform-origin:50% 50%;animation:blink 5.4s infinite}
+    .sparkle{animation:twinkle 2.2s ease-in-out infinite}
+    .sparkle.delay{animation-delay:.8s}
+
+    .scroll-cue{
+      position:absolute;
+      left:50%;
+      bottom:1.1rem;
+      transform:translateX(-50%);
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-weight:900;
+      z-index:2;
+      opacity:.8;
+    }
+    .scroll-cue::after{
+      content:"↓";
+      font-size:1rem;
+      animation:bounceCue 1.5s infinite;
+    }
+
+    .section{
+      padding:clamp(4rem, 8vw, 7rem) 5vw;
+      position:relative;
+    }
+    .section h2{
+      margin:.35rem 0 0;
+      font-size:clamp(2rem,4vw,4rem);
+      line-height:.95;
+      letter-spacing:-.04em;
+    }
+    .section p.lead{
+      margin:1rem 0 0;
+      max-width:40rem;
+      font-size:1.05rem;
+      line-height:1.7;
+      opacity:.75;
+      font-weight:600;
+    }
+
+    .support{
+      background:var(--paper);
+    }
+    .support-top{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:2rem;
+      align-items:end;
+      margin-bottom:2.5rem;
+    }
+    .burst-quote{
+      justify-self:end;
+      max-width:19rem;
+      padding:1.2rem 1.3rem;
+      border:3px solid var(--line);
+      border-radius:1.4rem;
+      background:#fff;
+      font-weight:800;
+      line-height:1.45;
+      box-shadow:var(--shadow);
+      transform:rotate(2deg);
+    }
+    .feature-strip{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      border-top:3px solid rgba(23,23,23,.14);
+      border-bottom:3px solid rgba(23,23,23,.14);
+      background:linear-gradient(180deg, rgba(255,216,76,.18), rgba(255,216,76,.06));
+    }
+    .feature{
+      padding:1.8rem 1.3rem 1.7rem;
+      position:relative;
+    }
+    .feature:not(:last-child){border-right:3px solid rgba(23,23,23,.1)}
+    .feature .num{
+      font-family:Bangers, sans-serif;
+      font-size:2.4rem;
+      color:var(--red);
+      line-height:1;
+      letter-spacing:.06em;
+    }
+    .feature h3{
+      margin:.4rem 0 .3rem;
+      font-size:1.2rem;
+      line-height:1.05;
+    }
+    .feature p{
+      margin:0;
+      opacity:.75;
+      line-height:1.6;
+      font-weight:600;
+      max-width:22ch;
+    }
+
+    .crew{
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,216,76,.35), transparent 18%),
+        radial-gradient(circle at 85% 85%, rgba(63,111,255,.12), transparent 16%),
+        #fff;
+    }
+    .crew-grid{
+      display:grid;
+      grid-template-columns:380px 1fr;
+      gap:2rem;
+      align-items:stretch;
+    }
+    .character-list{
+      display:flex;
+      flex-direction:column;
+      gap:.7rem;
+      padding-top:.8rem;
+    }
+    .char-btn{
+      border:none;
+      background:transparent;
+      text-align:left;
+      padding:1rem 0;
+      border-bottom:2px solid rgba(23,23,23,.14);
+      font-size:1.2rem;
+      font-weight:800;
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      cursor:pointer;
+      transition:.22s;
+      color:rgba(18,18,18,.54);
+    }
+    .char-btn span:last-child{
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      opacity:.7;
+      align-self:center;
+    }
+    .char-btn.active,.char-btn:hover{
+      color:var(--ink);
+      transform:translateX(6px);
+    }
+    .character-stage{
+      min-height:490px;
+      border:4px solid var(--line);
+      border-radius:2rem;
+      background:radial-gradient(circle at 32% 28%, rgba(255,255,255,.9), rgba(255,255,255,.2) 28%, transparent 29%), var(--stage);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      padding:2rem;
+      display:grid;
+      place-items:center;
+    }
+    .character-stage::before{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border:3px dashed rgba(23,23,23,.2);
+      border-radius:1.5rem;
+    }
+    .medallion{
+      position:relative;
+      width:min(320px,72vw);
+      aspect-ratio:1;
+      border-radius:50%;
+      border:4px solid var(--line);
+      background:rgba(255,255,255,.56);
+      display:grid;
+      place-items:center;
+      box-shadow:var(--shadow);
+      animation:float 4s ease-in-out infinite;
+    }
+    .medallion::before{
+      content:"";
+      position:absolute;
+      inset:-16px;
+      border-radius:50%;
+      border:4px dashed rgba(23,23,23,.22);
+      animation:spin 16s linear infinite;
+    }
+    .medallion-icon{
+      font-size:7rem;
+      line-height:1;
+      filter:drop-shadow(0 8px 0 rgba(255,255,255,.4));
+      user-select:none;
+    }
+    .orbit-tag{
+      position:absolute;
+      top:3%;
+      right:-6%;
+      background:#fff;
+      border:3px solid var(--line);
+      border-radius:999px;
+      padding:.7rem .95rem;
+      font-size:.74rem;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      transform:rotate(8deg);
+      box-shadow:var(--shadow);
+    }
+    .char-meta{
+      position:absolute;
+      left:2rem;
+      bottom:2rem;
+      max-width:27rem;
+      z-index:2;
+    }
+    .char-quote{
+      display:inline-block;
+      margin:0 0 .9rem;
+      background:#fff;
+      border:3px solid var(--line);
+      border-radius:1rem;
+      padding:.75rem 1rem;
+      font-weight:800;
+      box-shadow:var(--shadow);
+    }
+    .char-meta h3{
+      margin:0;
+      font-size:2rem;
+      line-height:1;
+    }
+    .char-meta p{
+      margin:.7rem 0 0;
+      max-width:34ch;
+      line-height:1.6;
+      opacity:.78;
+      font-weight:600;
+    }
+
+    .moments{
+      background:linear-gradient(180deg, #fff7df, #fff2c1);
+    }
+    .moments-grid{
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:2rem;
+      align-items:start;
+    }
+    .sticky-copy{
+      position:sticky;
+      top:110px;
+    }
+    .scene-list{display:flex;flex-direction:column;gap:1rem}
+    .scene{
+      display:grid;
+      grid-template-columns:86px 1fr auto;
+      gap:1rem;
+      align-items:center;
+      padding:1.45rem 1.1rem;
+      border:3px solid var(--line);
+      border-radius:1.4rem;
+      background:#fff;
+      box-shadow:var(--shadow);
+      transition:.25s ease;
+    }
+    .scene:hover{transform:translateY(-4px) rotate(-.5deg)}
+    .scene-num{
+      font-family:Bangers, sans-serif;
+      font-size:3rem;
+      color:var(--red);
+      line-height:.8;
+      text-align:center;
+      letter-spacing:.06em;
+    }
+    .scene h3{
+      margin:0 0 .25rem;
+      font-size:1.28rem;
+      line-height:1.05;
+    }
+    .scene p{
+      margin:0;
+      opacity:.75;
+      line-height:1.6;
+      font-weight:600;
+    }
+    .scene-tag{
+      padding:.65rem .85rem;
+      border-radius:999px;
+      border:3px solid var(--line);
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:900;
+      white-space:nowrap;
+      background:var(--yellow);
+    }
+
+    .cta{
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.16), transparent 18%),
+        radial-gradient(circle at 80% 28%, rgba(255,216,76,.18), transparent 20%),
+        linear-gradient(180deg, #252060, #12173e);
+      color:#fff;
+      overflow:hidden;
+    }
+    .cta::before,.cta::after{
+      content:"✦";
+      position:absolute;
+      font-size:2rem;
+      opacity:.7;
+      animation:twinkle 2.4s ease-in-out infinite;
+    }
+    .cta::before{left:8%;top:18%}
+    .cta::after{right:10%;bottom:18%;animation-delay:1s}
+    .cta-box{
+      max-width:860px;
+      margin:0 auto;
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+    .cta-box .eyebrow{color:#ffd84c}
+    .cta-box .eyebrow::before{background:#fff;box-shadow:3px 3px 0 var(--red)}
+    .cta-box h2{
+      margin:.5rem auto 0;
+      max-width:11ch;
+      font-size:clamp(2.4rem,6vw,5.6rem);
+      line-height:.9;
+      letter-spacing:-.05em;
+    }
+    .cta-box p{
+      max-width:36rem;
+      margin:1rem auto 0;
+      line-height:1.7;
+      color:rgba(255,255,255,.8);
+      font-weight:600;
+    }
+    .join-form{
+      margin:1.8rem auto 0;
+      max-width:620px;
+      display:flex;
+      gap:.8rem;
+      padding:.55rem;
+      background:rgba(255,255,255,.12);
+      border:3px solid rgba(255,255,255,.18);
+      border-radius:999px;
+      backdrop-filter:blur(8px);
+    }
+    .join-form input{
+      flex:1;
+      min-width:0;
+      border:none;
+      background:transparent;
+      color:#fff;
+      padding:1rem 1rem 1rem 1.2rem;
+      outline:none;
+      font-weight:700;
+    }
+    .join-form input::placeholder{color:rgba(255,255,255,.56)}
+    .join-form button{
+      border:none;
+      background:var(--yellow);
+      color:var(--ink);
+      padding:1rem 1.3rem;
+      border-radius:999px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .thanks{
+      display:none;
+      margin-top:1rem;
+      font-size:.95rem;
+      color:#ffd84c;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .footer{
+      margin-top:2rem;
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:rgba(255,255,255,.58);
+      font-weight:800;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .75s ease, transform .75s ease;
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @keyframes bob{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-12px)}
+    }
+    @keyframes wave{
+      0%,100%{transform:rotate(0deg)}
+      50%{transform:rotate(10deg)}
+    }
+    @keyframes blink{
+      0%, 44%, 48%, 100%{transform:scaleY(1)}
+      46%{transform:scaleY(.1)}
+    }
+    @keyframes twinkle{
+      0%,100%{transform:scale(1) rotate(0);opacity:.65}
+      50%{transform:scale(1.18) rotate(10deg);opacity:1}
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+    @keyframes wiggle{
+      0%,100%{transform:rotate(-12deg)}
+      50%{transform:rotate(-5deg)}
+    }
+    @keyframes bounceCue{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(6px)}
+    }
+    @keyframes spin{
+      to{transform:rotate(360deg)}
+    }
+
+    @media (max-width: 980px){
+      .support-top,
+      .crew-grid,
+      .moments-grid,
+      .hero-grid{grid-template-columns:1fr}
+      .hero{
+        padding-top:calc(var(--header-h) + 3.2rem);
+      }
+      .hero-grid{
+        gap:1rem;
+        min-height:auto;
+      }
+      .hero-copy{max-width:30rem}
+      .hero-visual{min-height:430px}
+      .burst-quote{justify-self:start}
+      .sticky-copy{position:static}
+      .feature-strip{grid-template-columns:1fr}
+      .feature:not(:last-child){
+        border-right:none;
+        border-bottom:3px solid rgba(23,23,23,.1);
+      }
+    }
+    @media (max-width: 760px){
+      :root{--header-h:70px}
+      .site-header{padding:14px}
+      .header-inner{
+        border-radius:1.1rem;
+        align-items:flex-start;
+        flex-direction:column;
+      }
+      .nav{gap:.8rem}
+      .hero-brand{font-size:min(28vw,6.2rem)}
+      .hero-title{max-width:12ch}
+      .hero-copy p{max-width:27ch}
+      .hero-visual{min-height:360px}
+      .sunburst{width:min(82vw,390px)}
+      .sticker{width:88px;height:88px;font-size:1.05rem}
+      .speech{font-size:.88rem}
+      .scene{grid-template-columns:68px 1fr}
+      .scene-tag{grid-column:2}
+      .character-stage{min-height:430px;padding:1.1rem}
+      .char-meta{left:1.15rem;right:1.15rem;bottom:1.15rem}
+      .join-form{
+        border-radius:1.3rem;
+        flex-direction:column;
+      }
+      .join-form button{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-mini">
+        <div class="brand-dot"></div>
+        <div>
+          <strong>SHINCHAN</strong>
+          <span>fan-made animated page</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#world">World</a>
+        <a href="#crew">Crew</a>
+        <a href="#moments">Moments</a>
+        <a href="#join" class="btn btn-primary" style="padding:.8rem 1rem;">Join Fun</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="cloud cloud-1" data-speed="0.15"></div>
+      <div class="cloud cloud-2" data-speed="-0.12"></div>
+      <div class="cloud cloud-3" data-speed="0.08"></div>
+
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="fan-tag"><span class="spark"></span> Inspired by Shinchan's wild cartoon energy</div>
+          <div class="hero-brand">SHINCHAN</div>
+          <h1 class="hero-title">Tiny troublemaker. Maximum chaos.</h1>
+          <p>A playful, animated fan page with loud colors, goofy motion, and the nonstop mischief that makes every scene fun.</p>
+          <div class="hero-actions">
+            <a href="#crew" class="btn btn-primary">Meet the crew</a>
+            <a href="#moments" class="btn btn-secondary">See the moments</a>
+          </div>
+          <div class="hero-note">Scroll for jokes, motion, and cartoon madness</div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="sunburst"></div>
+          <div class="sticker">Chaos<br>Mode</div>
+          <div class="speech">Ora ora!</div>
+
+          <svg class="hero-svg" viewBox="0 0 520 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="cartoon boy illustration">
+            <ellipse cx="260" cy="512" rx="118" ry="24" fill="rgba(0,0,0,.16)"/>
+            <g class="sparkle">
+              <path d="M92 126L98 108L104 126L122 132L104 138L98 156L92 138L74 132L92 126Z" fill="#fff" stroke="#171717" stroke-width="4"/>
+            </g>
+            <g class="sparkle delay">
+              <path d="M434 184L440 166L446 184L464 190L446 196L440 214L434 196L416 190L434 184Z" fill="#fff" stroke="#171717" stroke-width="4"/>
+            </g>
+
+            <g class="boy">
+              <g>
+                <path d="M201 394H235V476H201C192 476 185 469 185 460V411C185 401 192 394 201 394Z" fill="#ffd9b6" stroke="#171717" stroke-width="6"/>
+                <path d="M285 394H319C328 394 335 401 335 411V460C335 469 328 476 319 476H285V394Z" fill="#ffd9b6" stroke="#171717" stroke-width="6"/>
+                <path d="M177 474H236V497C236 507 228 515 218 515H195C185 515 177 507 177 497V474Z" fill="#4c82ff" stroke="#171717" stroke-width="6"/>
+                <path d="M284 474H343V497C343 507 335 515 325 515H302C292 515 284 507 284 497V474Z" fill="#4c82ff" stroke="#171717" stroke-width="6"/>
+              </g>
+
+              <g class="wave-arm">
+                <path d="M145 284C126 292 114 310 110 336C107 356 113 371 127 376C141 381 154 367 157 345L163 302" fill="#ffd9b6"/>
+                <path d="M145 284C126 292 114 310 110 336C107 356 113 371 127 376C141 381 154 367 157 345L163 302" stroke="#171717" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M118 375C127 374 136 376 146 381" stroke="#171717" stroke-width="6" stroke-linecap="round"/>
+              </g>
+
+              <g>
+                <path d="M376 294C392 307 402 328 403 350C404 369 394 381 380 381C366 381 357 367 355 349L352 304" fill="#ffd9b6"/>
+                <path d="M376 294C392 307 402 328 403 350C404 369 394 381 380 381C366 381 357 367 355 349L352 304" stroke="#171717" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+
+              <g>
+                <path d="M164 266C164 227 196 196 235 196H286C325 196 357 227 357 266V352H164V266Z" fill="#ff4b3a" stroke="#171717" stroke-width="6"/>
+                <path d="M164 352H357V395H164V352Z" fill="#ffd84c" stroke="#171717" stroke-width="6"/>
+                <path d="M246 196H274V352H246V196Z" fill="#ff6a5c" opacity=".5"/>
+              </g>
+
+              <g>
+                <path d="M178 135C178 87 217 48 265 48C313 48 352 87 352 135V171C352 224 309 267 256 267H252C199 267 156 224 156 171V157C156 145 166 135 178 135Z" fill="#ffd9b6" stroke="#171717" stroke-width="6"/>
+                <path d="M160 154C137 154 122 171 122 194C122 216 137 234 160 234C172 234 182 224 182 212V176C182 164 172 154 160 154Z" fill="#ffd9b6" stroke="#171717" stroke-width="6"/>
+                <path d="M348 154C371 154 388 171 388 194C388 216 371 234 348 234C336 234 326 224 326 212V176C326 164 336 154 348 154Z" fill="#ffd9b6" stroke="#171717" stroke-width="6"/>
+
+                <path d="M160 154C156 108 180 57 256 57C332 57 356 108 352 154L334 148C324 124 308 110 289 105C256 96 198 106 181 147L160 154Z" fill="#171717" stroke="#171717" stroke-width="6"/>
+                <path d="M170 128C197 110 232 106 255 107C278 108 313 112 341 126" stroke="#171717" stroke-width="6" stroke-linecap="round"/>
+
+                <path d="M196 158H235" stroke="#171717" stroke-width="12" stroke-linecap="round"/>
+                <path d="M279 158H318" stroke="#171717" stroke-width="12" stroke-linecap="round"/>
+
+                <g class="blink">
+                  <ellipse cx="213" cy="191" rx="10" ry="12" fill="#171717"/>
+                  <ellipse cx="299" cy="191" rx="10" ry="12" fill="#171717"/>
+                </g>
+
+                <path d="M257 198V218" stroke="#171717" stroke-width="6" stroke-linecap="round"/>
+                <path d="M219 231C234 243 279 243 294 231" stroke="#171717" stroke-width="6" stroke-linecap="round"/>
+                <path d="M228 231C233 250 279 250 285 231" fill="#ff7b8c" stroke="#171717" stroke-width="6" stroke-linejoin="round"/>
+                <ellipse cx="193" cy="220" rx="11" ry="7" fill="#ff9ba7" opacity=".7"/>
+                <ellipse cx="320" cy="220" rx="11" ry="7" fill="#ff9ba7" opacity=".7"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <a href="#world" class="scroll-cue">Scroll</a>
+    </section>
+
+    <section class="section support" id="world">
+      <div class="wrap">
+        <div class="support-top">
+          <div class="reveal">
+            <div class="eyebrow">Kasukabe energy</div>
+            <h2>Small kid. Giant reactions.</h2>
+            <p class="lead">This page packs the feel of a cartoon intro: loud color, quick motion, and just enough mischief to keep every section alive.</p>
+          </div>
+          <div class="burst-quote reveal">Every scene works because the humor is instant: family noise, school chaos, silly confidence, and one kid always ready to say the wrong thing.</div>
+        </div>
+
+        <div class="feature-strip">
+          <div class="feature reveal">
+            <div class="num">01</div>
+            <h3>Mischief first</h3>
+            <p>Bold entrances, cheeky details, and bounce-filled animation set the tone fast.</p>
+          </div>
+          <div class="feature reveal">
+            <div class="num">02</div>
+            <h3>Cartoon motion</h3>
+            <p>Cloud drift, sticker wobble, character bob, and scroll reveals keep the page playful.</p>
+          </div>
+          <div class="feature reveal">
+            <div class="num">03</div>
+            <h3>Fan-page style</h3>
+            <p>Made as a colorful tribute look, not an official site, with a bright poster-like first screen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section crew" id="crew">
+      <div class="wrap crew-grid">
+        <div class="reveal">
+          <div class="eyebrow">Meet the crew</div>
+          <h2>Every episode needs someone to panic.</h2>
+          <p class="lead">Tap a name and the spotlight shifts. Each character brings a different kind of chaos to the room.</p>
+
+          <div class="character-list">
+            <button class="char-btn active" data-char="shinchan"><span>Shinchan</span><span>chief mischief</span></button>
+            <button class="char-btn" data-char="himawari"><span>Himawari</span><span>sparkle boss</span></button>
+            <button class="char-btn" data-char="misae"><span>Misae</span><span>volume up</span></button>
+            <button class="char-btn" data-char="hiroshi"><span>Hiroshi</span><span>calm attempt</span></button>
+            <button class="char-btn" data-char="shiro"><span>Shiro</span><span>innocent witness</span></button>
+          </div>
+        </div>
+
+        <div class="character-stage reveal" id="characterStage" style="--stage:linear-gradient(135deg,#ffd84c,#ff914d);">
+          <div class="medallion">
+            <div class="medallion-icon" id="charIcon">😏</div>
+            <div class="orbit-tag" id="charRole">Chief Mischief</div>
+          </div>
+
+          <div class="char-meta">
+            <div class="char-quote" id="charQuote">"Snacks first. Rules later."</div>
+            <h3 id="charName">Shinchan</h3>
+            <p id="charDesc">The unstoppable center of the chaos—loud, fearless, funny, and somehow always one step ahead of everyone trying to stop him.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section moments" id="moments">
+      <div class="wrap moments-grid">
+        <div class="sticky-copy reveal">
+          <div class="eyebrow">Animated moments</div>
+          <h2>Three moods. One noisy world.</h2>
+          <p class="lead">Scroll through the beats that make a Shinchan-style page feel alive: school trouble, family drama, and a dance-ready finish.</p>
+        </div>
+
+        <div class="scene-list">
+          <article class="scene reveal">
+            <div class="scene-num">01</div>
+            <div>
+              <h3>Schoolyard chaos</h3>
+              <p>A tiny problem turns into a full scene in seconds. Quick reactions and louder expressions do the work.</p>
+            </div>
+            <div class="scene-tag">loud</div>
+          </article>
+
+          <article class="scene reveal">
+            <div class="scene-num">02</div>
+            <div>
+              <h3>Family overdrive</h3>
+              <p>The funniest energy comes from home: everyone talks, nobody agrees, and that is exactly why it lands.</p>
+            </div>
+            <div class="scene-tag" style="background:#ff7e6e;">wild</div>
+          </article>
+
+          <article class="scene reveal">
+            <div class="scene-num">03</div>
+            <div>
+              <h3>Dance break finish</h3>
+              <p>End on movement, smiles, and a little nonsense. Cartoon pages should leave with a grin, not a whisper.</p>
+            </div>
+            <div class="scene-tag" style="background:#8dd6ff;">fun</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta" id="join">
+      <div class="cta-box reveal">
+        <div class="eyebrow">Join the fun</div>
+        <h2>Step into Shinchan’s noisy little world.</h2>
+        <p>Drop your email for a playful thank-you. This is a fan-style demo page built for fun animation and bright cartoon energy.</p>
+
+        <form class="join-form" id="joinForm">
+          <input type="email" id="email" placeholder="Enter your email" required />
+          <button type="submit">Send me chaos</button>
+        </form>
+        <div class="thanks" id="thanks">You are officially in the fun club.</div>
+
+        <div class="footer">Fan-made inspired landing page • Animated with pure HTML, CSS & JS</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    },{threshold:0.14});
+    revealEls.forEach(el=>io.observe(el));
+
+    const characterData = {
+      shinchan:{
+        icon:"😏",
+        role:"Chief Mischief",
+        quote:"“Snacks first. Rules later.”",
+        name:"Shinchan",
+        desc:"The unstoppable center of the chaos—loud, fearless, funny, and somehow always one step ahead of everyone trying to stop him.",
+        stage:"linear-gradient(135deg,#ffd84c,#ff914d)"
+      },
+      himawari:{
+        icon:"✨",
+        role:"Sparkle Boss",
+        quote:"“If it shines, it is mine.”",
+        name:"Himawari",
+        desc:"Tiny, adorable, and already committed to drama. She turns cute into a power move and steals the frame every time.",
+        stage:"linear-gradient(135deg,#ffe37c,#ffb84c)"
+      },
+      misae:{
+        icon:"😤",
+        role:"Volume Up",
+        quote:"“Shinchan! Right now!”",
+        name:"Misae",
+        desc:"The house runs on her panic, patience, and perfectly timed shouting. She is the rhythm section of every family meltdown.",
+        stage:"linear-gradient(135deg,#7ea7ff,#4f67ff)"
+      },
+      hiroshi:{
+        icon:"😅",
+        role:"Calm Attempt",
+        quote:"“Can we all relax for one minute?”",
+        name:"Hiroshi",
+        desc:"He tries to keep things normal, which only makes the chaos feel even funnier when it absolutely refuses to cooperate.",
+        stage:"linear-gradient(135deg,#73e3b4,#28b788)"
+      },
+      shiro:{
+        icon:"🐶",
+        role:"Innocent Witness",
+        quote:"“Woof. I saw nothing.”",
+        name:"Shiro",
+        desc:"Soft, loyal, and often the quiet center of the storm. Even when the room explodes, Shiro somehow keeps the charm intact.",
+        stage:"linear-gradient(135deg,#ffffff,#d6d6d6)"
+      }
+    };
+
+    const stage = document.getElementById('characterStage');
+    const charIcon = document.getElementById('charIcon');
+    const charRole = document.getElementById('charRole');
+    const charQuote = document.getElementById('charQuote');
+    const charName = document.getElementById('charName');
+    const charDesc = document.getElementById('charDesc');
+
+    document.querySelectorAll('.char-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.char-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const data = characterData[btn.dataset.char];
+        charIcon.textContent = data.icon;
+        charRole.textContent = data.role;
+        charQuote.textContent = data.quote;
+        charName.textContent = data.name;
+        charDesc.textContent = data.desc;
+        stage.style.setProperty('--stage', data.stage);
+        stage.animate([
+          {transform:'scale(.98)', opacity:.92},
+          {transform:'scale(1)', opacity:1}
+        ], {duration:280, easing:'ease-out'});
+      });
+    });
+
+    const clouds = document.querySelectorAll('.cloud');
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY;
+      clouds.forEach(cloud=>{
+        const speed = parseFloat(cloud.dataset.speed || 0.1);
+        cloud.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+      });
+    }, {passive:true});
+
+    document.getElementById('joinForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = document.getElementById('email');
+      if(!email.value) return;
+      document.getElementById('thanks').style.display = 'block';
+      email.value = '';
+    });
+  </script>
+</body>
+  </html>
